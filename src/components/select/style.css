@@ -38,7 +38,7 @@
 
 .selected::after {
     content: "";
-    background: url("../../../img/arrow-down.svg");
+    background: url("../../img/arrow-down.svg");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -109,4 +109,8 @@
 .select-box .options-container.active~.search-box input {
     opacity: 1;
     pointer-events: auto;
+}
+
+.option .selected {
+    background: #ffff;
 }
