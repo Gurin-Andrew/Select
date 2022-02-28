@@ -1,4 +1,5 @@
-import React, { MutableRefObject, useRef, useState } from 'react'
+import React, { useState } from 'react'
+
 import './style.css'
 
 type data = {
@@ -15,11 +16,6 @@ interface iSelect {
 // eslint-disable-next-line no-shadow
 export const Select: React.FC<iSelect> = ({ data, header, multiple }) => {
     const [active, setActive] = useState(true)
-
-    const inputEl = useRef() as MutableRefObject<HTMLInputElement>
-    const clearInput = () => {
-        inputEl.current.value = ''
-    }
     const [selectedOptions, setSelectedOptions] = useState<Array<string>>([])
     const [searchValue, setSearchValue] = useState('')
     const toggleOption = (selectedOption: string) => {
@@ -48,6 +44,15 @@ export const Select: React.FC<iSelect> = ({ data, header, multiple }) => {
                 searchValue.toLowerCase()
             ) !== -1
     )
+    const getInputValue = (
+        e: { target: { value: React.SetStateAction<string> } } | undefined
+    ) => {
+        if (e !== undefined) {
+            setSearchValue(e.target.value)
+        } else {
+            setSearchValue('')
+        }
+    }
     return (
         <div className="container">
             <h2>{header} </h2>
@@ -84,7 +89,6 @@ export const Select: React.FC<iSelect> = ({ data, header, multiple }) => {
                     className="selected"
                     onClick={() => {
                         setActive(!active)
-                        clearInput()
                         setSearchValue('')
                     }}
                 >
@@ -95,10 +99,8 @@ export const Select: React.FC<iSelect> = ({ data, header, multiple }) => {
                 <div className="search-box">
                     <input
                         type="text"
-                        ref={inputEl}
-                        onChange={(event) => {
-                            setSearchValue(event.target.value)
-                        }}
+                        value={searchValue}
+                        onChange={getInputValue}
                         placeholder="Start Typing..."
                     />
                 </div>
