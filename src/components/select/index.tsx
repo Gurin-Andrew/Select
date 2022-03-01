@@ -58,29 +58,35 @@ export const Select: React.FC<iSelect> = ({ data, header, multiple }) => {
             <h2>{header} </h2>
             <div className="select-box">
                 <div className={`options-container ${active ? 'active' : ''}`}>
-                    {filtredData.map((filredItem) => (
+                    {filtredData.map((filtredItem) => (
                         <div
                             className={`option ${
                                 selectedOptions.some(
-                                    (item: string) => item === filredItem.value
+                                    (item: string) => item === filtredItem.value
                                 )
                                     ? 'isSelected'
                                     : ''
                             }`}
-                            key={filredItem.id}
+                            key={filtredItem.id}
                             onClick={() => {
-                                const selectedOption = filredItem.value
+                                const selectedOption = filtredItem.value
                                 toggleOption(selectedOption)
                             }}
                         >
                             <input
                                 type="radio"
                                 className="radio"
-                                id={filredItem.value}
+                                id={filtredItem.value}
                                 name="category"
+                                style={{
+                                    backgroundImage: `url(${filtredItem.icon})`,
+                                }}
                             />
-                            <label htmlFor={filredItem.value}>
-                                {filredItem.value}
+                            {filtredItem.icon === '' || (
+                                <img src={filtredItem.icon} alt=" " />
+                            )}
+                            <label htmlFor={filtredItem.value}>
+                                {filtredItem.value}
                             </label>
                         </div>
                     ))}

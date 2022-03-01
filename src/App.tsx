@@ -1,9 +1,10 @@
 import React from 'react'
 import './App.css'
 import { Select } from './components/select/index'
+import irkutsk from './img/irkutk.png'
 
 function App() {
-    const datas = [
+    const Test = [
         'Иркутск',
         'Томск',
         'Красноярск',
@@ -11,10 +12,12 @@ function App() {
         'Москва',
         'Новосибирск',
     ]
-    const data = datas.map((index) => ({
+    const data = Test.map((index) => ({
         value: index,
-        id: datas.indexOf(index),
+        id: Test.indexOf(index),
+        icon: '',
     }))
+    data[0].icon = irkutsk
     return (
         <div className="App">
             <Select data={data} header="Choose town" multiple={false} />
