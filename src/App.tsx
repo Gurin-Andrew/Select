@@ -20,8 +20,25 @@ function App() {
     data[0].icon = irkutsk
     return (
         <div className="App">
-            <Select data={data} header="Choose town" multiple={false} />
-            <Select data={data} header="Choose town" multiple />
+            <Select
+                data={data}
+                header="Choose town"
+                multiple={false}
+                selectSize="small"
+            />
+            <Select
+                data={data}
+                header="Choose town"
+                multiple
+                selectSize="large"
+                background="green"
+            />
+            <Select
+                data={data}
+                header="Choose town"
+                multiple
+                background="red"
+            />
         </div>
     )
 }

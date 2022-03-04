@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import './style.css'
 
+type size = 'small' | 'medium' | 'large'
 type data = {
     id: number
     value: string
@@ -11,10 +12,18 @@ interface iSelect {
     data: data
     header: string
     multiple: boolean
+    selectSize?: size
+    background?: string
 }
 
-// eslint-disable-next-line no-shadow
-export const Select: React.FC<iSelect> = ({ data, header, multiple }) => {
+export const Select: React.FC<iSelect> = ({
+    // eslint-disable-next-line no-shadow
+    data,
+    header,
+    multiple,
+    selectSize = 'medium',
+    background = '#2f3640',
+}) => {
     const [active, setActive] = useState(true)
     const [selectedOptions, setSelectedOptions] = useState<Array<string>>([])
     const [searchValue, setSearchValue] = useState('')
@@ -56,8 +65,11 @@ export const Select: React.FC<iSelect> = ({ data, header, multiple }) => {
     return (
         <div className="container">
             <h2>{header} </h2>
-            <div className="select-box">
-                <div className={`options-container ${active ? 'active' : ''}`}>
+            <div className={`select-box ${selectSize}`}>
+                <div
+                    className={`options-container ${active ? 'active' : ''}`}
+                    style={{ backgroundColor: background }}
+                >
                     {filtredData.map((filtredItem) => (
                         <div
                             className={`option ${
@@ -78,16 +90,11 @@ export const Select: React.FC<iSelect> = ({ data, header, multiple }) => {
                                 className="radio"
                                 id={filtredItem.value}
                                 name="category"
-                                style={{
-                                    backgroundImage: `url(${filtredItem.icon})`,
-                                }}
                             />
                             {filtredItem.icon === '' || (
                                 <img src={filtredItem.icon} alt=" " />
                             )}
-                            <label htmlFor={filtredItem.value}>
-                                {filtredItem.value}
-                            </label>
+                            <label>{filtredItem.value}</label>
                         </div>
                     ))}
                 </div>
@@ -96,6 +103,9 @@ export const Select: React.FC<iSelect> = ({ data, header, multiple }) => {
                     onClick={() => {
                         setActive(!active)
                         setSearchValue('')
+                    }}
+                    style={{
+                        backgroundColor: background,
                     }}
                 >
                     {selectedOptions.length === 0
@@ -108,6 +118,7 @@ export const Select: React.FC<iSelect> = ({ data, header, multiple }) => {
                         value={searchValue}
                         onChange={getInputValue}
                         placeholder="Start Typing..."
+                        style={{ border: `8px solid ${background}` }}
                     />
                 </div>
             </div>

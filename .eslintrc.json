@@ -31,6 +31,8 @@
         "jsx-a11y/click-events-have-key-events": "off",
         "jsx-a11y/no-static-element-interactions": "off",
         "import/extensions": "off",
-        "import/no-unresolved": "off"
+        "import/no-unresolved": "off",
+        "react/require-default-props": "off",
+        "jsx-a11y/label-has-associated-control": "off"
     }
 }
