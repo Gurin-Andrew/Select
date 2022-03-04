@@ -18,6 +18,19 @@ function App() {
         icon: '',
     }))
     data[0].icon = irkutsk
+
+    /* Для компонента доступны следующие пропсы:
+        1)multiple: boolean. Если == true, то будет доступен выбор из нескольких вариантов
+        2)selectSize: "small"|"medium"|"large" по умолчанию medium: размер компонента
+        3)background: String - фоновый цвет компонента
+        4)header: Заголовок компонента
+        5)Формат данных на вход:  {
+            value:string,
+            id:nomber,
+            icon?:string
+        }
+    */
+
     return (
         <div className="App">
             <Select
