@@ -2,22 +2,21 @@ import React, { useState } from 'react'
 
 import './style.css'
 
-type size = 'small' | 'medium' | 'large'
-type data = {
+type Size = 'small' | 'medium' | 'large'
+type Data = {
     id: number
     value: string
     icon?: string
 }[]
-interface iSelect {
-    data: data
+interface SelectInterface {
+    data: Data
     header: string
     multiple: boolean
-    selectSize?: size
+    selectSize?: Size
     background?: string
 }
 
-export const Select: React.FC<iSelect> = ({
-    // eslint-disable-next-line no-shadow
+export const Select: React.FC<SelectInterface> = ({
     data,
     header,
     multiple,
@@ -53,15 +52,7 @@ export const Select: React.FC<iSelect> = ({
                 searchValue.toLowerCase()
             ) !== -1
     )
-    const getInputValue = (
-        e: { target: { value: React.SetStateAction<string> } } | undefined
-    ) => {
-        if (e !== undefined) {
-            setSearchValue(e.target.value)
-        } else {
-            setSearchValue('')
-        }
-    }
+
     return (
         <div className="container">
             <h2>{header} </h2>
@@ -91,10 +82,10 @@ export const Select: React.FC<iSelect> = ({
                                 id={filtredItem.value}
                                 name="category"
                             />
-                            {filtredItem.icon === '' || (
-                                <img src={filtredItem.icon} alt=" " />
-                            )}
                             <label>{filtredItem.value}</label>
+                            {filtredItem.icon && (
+                                <img src={filtredItem.icon} alt="Icon" />
+                            )}
                         </div>
                     ))}
                 </div>
@@ -108,15 +99,15 @@ export const Select: React.FC<iSelect> = ({
                         backgroundColor: background,
                     }}
                 >
-                    {selectedOptions.length === 0
-                        ? header
-                        : selectedOptions.join(', ')}
+                    {selectedOptions.length
+                        ? selectedOptions.join(', ')
+                        : header}
                 </div>
                 <div className="search-box">
                     <input
                         type="text"
                         value={searchValue}
-                        onChange={getInputValue}
+                        onChange={(e) => setSearchValue(e.target.value || '')}
                         placeholder="Start Typing..."
                         style={{ border: `8px solid ${background}` }}
                     />

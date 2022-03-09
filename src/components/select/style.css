@@ -100,12 +100,12 @@
 }
 
 .option img {
-    position: absolute;
-    right: 15px;
     height: 30px;
     z-index: 500;
     opacity: 1;
     width: 32px;
+    padding-bottom: 5px;
+    float: right;
 }
 
 .search-box input {

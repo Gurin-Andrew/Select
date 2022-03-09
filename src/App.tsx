@@ -9,12 +9,16 @@ function App() {
         'Томск',
         'Красноярск',
         'Питер',
-        'Москва',
-        'Новосибирск',
+        'Моск1ва',
+        'Москва1',
+        'Москв1а',
+        'Мос5ква',
+        'Мос3ква',
+        'Мо2сква',
     ]
-    const data = Test.map((index) => ({
-        value: index,
-        id: Test.indexOf(index),
+    const data = Test.map((item, index) => ({
+        value: item,
+        id: index,
         icon: '',
     }))
     data[0].icon = irkutsk
@@ -28,7 +32,7 @@ function App() {
             value:string,
             id:nomber,
             icon?:string
-        }
+        }[]
     */
 
     return (
